@@ -1,0 +1,8 @@
+luigi-venv
+
+*.DS_Store
+__MACOSX
+
+*.py[aoc]
+*.ipynb_checkpoints
+__pycache__
