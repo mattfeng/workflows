@@ -6,3 +6,6 @@ __MACOSX
 *.py[aoc]
 *.ipynb_checkpoints
 __pycache__
+
+.env
+key.json
