@@ -1,0 +1,41 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: paperspace
+spec:
+  schedule: "* * * * *"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: paperspace
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: main
+              image: mattfeng/paperspace-availability:0.0.1debug0
+              env:
+                - name: ACCESS_TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      name: paperspace-secrets
+                      key: access_token
+
+                - name: TEAM_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: paperspace-secrets
+                      key: team_id
+
+                - name: NAMESPACE
+                  valueFrom:
+                    secretKeyRef:
+                      name: paperspace-secrets
+                      key: namespace
+
+                - name: MONGO_URI
+                  valueFrom:
+                    secretKeyRef:
+                      name: paperspace-secrets
+                      key: mongo_uri

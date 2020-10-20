@@ -1,3 +1,4 @@
 .env
 *egg-info
 venv
+*.k8s.yaml
