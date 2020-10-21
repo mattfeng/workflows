@@ -3,13 +3,19 @@
 import requests
 
 class GradientAvailability(object):
-    TARGET_URL = "https://api.paperspace.io/notebooks/getNotebooks?access_token={}&modelName=team&filter=%7B%7D&teamId={}&namespace={}"
+    TARGET_URL = "https://api.paperspace.io/notebooks/getNotebooks?modelName=team&filter=%7B%7D&teamId={}&namespace={}"
 
-    def __init__(self, access_tok, team_id, namespace):
-        self.target = self.TARGET_URL.format(access_tok, team_id, namespace)
+    def __init__(self, api_key, team_id, namespace):
+        self.api_key = api_key
+        self.target = self.TARGET_URL.format(team_id, namespace)
 
     def get_free_notebooks(self):
-        req = requests.get(self.target)
+        headers = {
+            "x-api-key": self.api_key
+        }
+        req = requests.get(self.target, headers=headers)
+
+        print(req.text)
 
         machines = req.json()["availableMachines"]
 

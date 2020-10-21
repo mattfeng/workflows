@@ -16,11 +16,11 @@ spec:
             - name: main
               image: mattfeng/paperspace-availability:0.0.1debug0
               env:
-                - name: ACCESS_TOKEN
+                - name: API_KEY
                   valueFrom:
                     secretKeyRef:
                       name: paperspace-secrets
-                      key: access_token
+                      key: api_key
 
                 - name: TEAM_ID
                   valueFrom:

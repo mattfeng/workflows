@@ -7,9 +7,9 @@ from datetime import datetime
 from pymongo import MongoClient
 from paperspace.gradient import GradientAvailability
 
-def main(access_token, team_id, namespace, mongo_uri):
-    if access_token is None:
-        raise Exception("Access token (`--access-token`) cannot be null.")
+def main(api_key, team_id, namespace, mongo_uri):
+    if api_key is None:
+        raise Exception("API key (`--api-key`) cannot be null.")
     
     if team_id is None:
         raise Exception("Team id (`--team-id`) cannot be null.")
@@ -17,7 +17,7 @@ def main(access_token, team_id, namespace, mongo_uri):
     if namespace is None:
         raise Exception("Namespace (`--namespace`) cannot be null.")
 
-    avail = GradientAvailability(access_token, team_id, namespace)
+    avail = GradientAvailability(api_key, team_id, namespace)
 
     data = avail.get_free_notebooks()
     print(data)
@@ -41,9 +41,9 @@ def main(access_token, team_id, namespace, mongo_uri):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("-t", "--access-token",
-        dest="access_token",
-        default=os.environ.get("ACCESS_TOKEN")
+    parser.add_argument("-k", "--api-key",
+        dest="api_key",
+        default=os.environ.get("API_KEY")
         )
 
     parser.add_argument("-i", "--team-id",
@@ -63,4 +63,4 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    main(args.access_token, args.team_id, args.namespace, args.mongo_uri)
+    main(args.api_key, args.team_id, args.namespace, args.mongo_uri)
